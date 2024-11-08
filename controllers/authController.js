@@ -37,3 +37,21 @@ exports.login = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 };
+// Actualizar un usuario
+exports.actualizarUsuario = async (req, res) => {
+    try {
+        const usuarioActualizado = await Usuario.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        res.json(usuarioActualizado);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+// Eliminar un usuario
+exports.eliminarUsuario = async (req, res) => {
+    try {
+        await Usuario.findByIdAndDelete(req.params.id);
+        res.json({ message: 'Usuario eliminado' });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
