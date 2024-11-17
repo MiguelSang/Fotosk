@@ -1,0 +1,156 @@
+{
+    "info": {
+      "name": "FotoTasks API",
+      "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+      {
+        "name": "Autenticación",
+        "item": [
+          {
+            "name": "Registro de Usuario",
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/api/auth/register",
+                "protocol": "http",
+                "host": ["localhost:5000"],
+                "path": ["api", "auth", "register"]
+              },
+              "body": {
+                "mode": "raw",
+                "raw": "{\"nombre\": \"Usuario1\", \"email\": \"usuario1@example.com\", \"password\": \"password123\"}"
+              }
+            }
+          },
+          {
+            "name": "Inicio de Sesión",
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/api/auth/login",
+                "protocol": "http",
+                "host": ["localhost:5000"],
+                "path": ["api", "auth", "login"]
+              },
+              "body": {
+                "mode": "raw",
+                "raw": "{\"email\": \"usuario1@example.com\", \"password\": \"password123\"}"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "name": "Retos",
+        "item": [
+          {
+            "name": "Crear Reto",
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{token}}"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/api/retos",
+                "protocol": "http",
+                "host": ["localhost:5000"],
+                "path": ["api", "retos"]
+              },
+              "body": {
+                "mode": "raw",
+                "raw": "{\"titulo\": \"Reto Fotográfico\", \"descripcion\": \"Captura la mejor foto al amanecer\"}"
+              }
+            }
+          },
+          {
+            "name": "Obtener Todos los Retos",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/api/retos",
+                "protocol": "http",
+                "host": ["localhost:5000"],
+                "path": ["api", "retos"]
+              }
+            }
+          }
+        ]
+      },
+      {
+        "name": "Publicaciones",
+        "item": [
+          {
+            "name": "Crear Publicación",
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{token}}"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/api/publicaciones",
+                "protocol": "http",
+                "host": ["localhost:5000"],
+                "path": ["api", "publicaciones"]
+              },
+              "body": {
+                "mode": "raw",
+                "raw": "{\"usuario\": \"Usuario1\", \"retoId\": \"ID_DEL_RETO\", \"imagenUrl\": \"http://example.com/imagen.jpg\", \"descripcion\": \"Foto para el reto\"}"
+              }
+            }
+          },
+          {
+            "name": "Obtener Todas las Publicaciones",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/api/publicaciones",
+                "protocol": "http",
+                "host": ["localhost:5000"],
+                "path": ["api", "publicaciones"]
+              }
+            }
+          }
+        ]
+      }
+    ]
+  }
+  
