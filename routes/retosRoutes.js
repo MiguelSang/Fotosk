@@ -15,4 +15,7 @@ router.put('/:id', authMiddleware, retosController.actualizarReto);
 // Ruta para eliminar un reto (requiere autenticación)
 router.delete('/:id', authMiddleware, retosController.eliminarReto);
 
+// Ruta para subir fotos al participar en un reto
+router.post('/subir-foto', retosController.subirFotoReto);
+
 module.exports = router;
