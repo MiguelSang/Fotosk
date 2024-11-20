@@ -5,7 +5,7 @@ const Usuario = require('../models/Usuario');
 // Registro de usuario
 exports.register = async (req, res) => {
     try {
-        const { nombre, email, password } = req.body;
+        const { nombre, email, password, rol } = req.body;
 
         // Verificar si el usuario ya existe
         const existingUser = await Usuario.findOne({ email });
@@ -21,6 +21,7 @@ exports.register = async (req, res) => {
             nombre,
             email,
             password: hashedPassword,
+            rol: rol || 'usuario', // Por defecto, asignar rol de "usuario"
         });
 
         await newUser.save();
@@ -53,10 +54,14 @@ exports.login = async (req, res) => {
         }
 
         // Generar el token JWT
-        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+        const token = jwt.sign(
+            { id: user._id, rol: user.rol }, // Incluye el rol en el token
+            process.env.JWT_SECRET,
+            { expiresIn: '1h' }
+        );
 
-        // Enviar el token y el nombre del usuario
-        res.json({ token, nombre: user.nombre });
+        // Enviar el token, el nombre del usuario y el rol
+        res.json({ token, nombre: user.nombre, rol: user.rol });
     } catch (error) {
         console.error("Error en el inicio de sesión:", error.message);
         res.status(500).json({ message: error.message });

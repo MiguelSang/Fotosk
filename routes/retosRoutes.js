@@ -1,21 +1,20 @@
 const express = require('express');
 const router = express.Router();
 const retosController = require('../controllers/retosController');
-const authMiddleware = require('../middleware/authMiddleware');
 
-// Ruta para crear un reto (requiere autenticación)
-router.post('/', authMiddleware, retosController.crearReto);
+// Crear un reto
+router.post('/', retosController.crearReto);
 
-// Ruta para obtener todos los retos (pública)
+// Obtener todos los retos
 router.get('/', retosController.obtenerRetos);
 
-// Ruta para actualizar un reto (requiere autenticación)
-router.put('/:id', authMiddleware, retosController.actualizarReto);
+// Actualizar un reto
+router.put('/:id', retosController.actualizarReto);
 
-// Ruta para eliminar un reto (requiere autenticación)
-router.delete('/:id', authMiddleware, retosController.eliminarReto);
+// Eliminar un reto
+router.delete('/:id', retosController.eliminarReto);
 
-// Ruta para subir fotos al participar en un reto
+// Subir foto para participar en un reto
 router.post('/subir-foto', retosController.subirFotoReto);
 
 module.exports = router;
