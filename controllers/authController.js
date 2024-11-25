@@ -25,7 +25,21 @@ exports.register = async (req, res) => {
         });
 
         await newUser.save();
-        res.status(201).json({ message: 'Usuario registrado exitosamente' });
+
+        // Generar el token JWT
+        const token = jwt.sign(
+            { id: newUser._id, rol: newUser.rol }, // Incluye el rol en el token
+            process.env.JWT_SECRET,
+            { expiresIn: '1h' }
+        );
+
+        // Responder con el token, nombre y rol
+        res.status(201).json({
+            message: 'Usuario registrado exitosamente',
+            token,
+            nombre: newUser.nombre,
+            rol: newUser.rol
+        });
     } catch (error) {
         // Manejar el error de duplicación de clave
         if (error.code === 11000) {
